@@ -37,14 +37,32 @@ export default {
 <template>
 
 <main class="container-fluid p-5">
-    <section class="main-content container p-5">
-        <div class="results-number d-flex align-items-center">
-            <h4 class="ms-4">
-                Found {{ CardsList.length }} cards
-            </h4>
-        </div>
-        <div class="cards p-4"></div>
-    </section>
+
+            <section class="main-content container p-5">
+                <div class="results-number d-flex align-items-center">
+                    <h4 class="ms-4">
+                        Found {{ CardsList.length }} cards
+                    </h4>
+                </div>
+                
+                <div class="cards-list">
+                    <div class="cards p-2" v-for="(card, index) in CardsList" :key="index">
+                        <div class="card">
+                            <img class="card-img-top" :src="card.card_images[0].image_url" :alt="card.name">
+                            <div class="card-body">
+                                <h5 class="card-title fw-bold">
+                                    {{ card.name }}
+                                </h5>
+                                <p class="card-text">
+                                    {{ card.archetype }}
+                                </p>
+                            </div>
+                        </div>
+                    </div>
+                </div>                
+            </section>
+
+    
 </main>
 
 </template>
@@ -70,5 +88,26 @@ div.results-number{
     color: white;
 }
 
+div.cards-list{
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    flex-wrap: wrap;
+}
+
+div.cards{
+    width: calc((100%/5) - .5rem);
+    align-self: flex-start;
+    border-color: transparent;
+    text-align: center;
+
+    div.card-body {
+        background-color: #d48f38;
+        
+        h5{
+            color: white;
+        }
+    }
+}
 
 </style>
