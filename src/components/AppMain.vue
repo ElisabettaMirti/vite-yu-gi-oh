@@ -1,5 +1,6 @@
 <script>
 import axios from 'axios';
+import SingleCard from './SingleCard.vue'
 
 export default {
     data(){
@@ -8,12 +9,12 @@ export default {
         }
     },
     components: {
-        
+        SingleCard
     },
     methods: {
         getCards(){
             axios.get('https://db.ygoprodeck.com/api/v7/cardinfo.php?num=20&offset=0')
-        .then(function (response) {
+        .then( (response) => {
             // handle success
             console.log(response.data.data);
             this.CardsList = response.data.data;
@@ -35,10 +36,13 @@ export default {
 
 <template>
 
-<main>
-
-    <section class="main-content">
-        <div class="results-number"></div>
+<main class="container-fluid p-5">
+    <section class="main-content container p-5">
+        <div class="results-number d-flex align-items-center">
+            <h4 class="ms-4">
+                Found {{ CardsList.length }} cards
+            </h4>
+        </div>
         <div class="cards p-4"></div>
     </section>
 </main>
@@ -56,12 +60,14 @@ main{
 
     section.main-content{
         background-color: white;
+        width: 90%;
     }
 }
 
 div.results-number{
     height: 100px;
     background-color: #212529;
+    color: white;
 }
 
 
