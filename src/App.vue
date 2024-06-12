@@ -25,7 +25,7 @@ export default {
 </template>
 
 <style lang="scss" scoped>
-  @use './styles/partials/mixins.scss' as *;
-  @use './styles/partials/variables.scss' as *;
+  @use './styles/partials/variables' as *;
+  @use './styles/partials/mixins' as *;
   @use './styles/general.scss';
 </style>
