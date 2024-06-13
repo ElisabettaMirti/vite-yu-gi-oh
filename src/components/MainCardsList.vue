@@ -18,7 +18,7 @@ export default {
 <section class="main-content container p-5">
         <div class="results-number d-flex align-items-center">
             <h4 class="ms-4">
-                Found {{ store.cards.length }} cards
+                Found {{ store.cards.data.length }} cards
             </h4>
         </div>
     <div class="cards-list">
