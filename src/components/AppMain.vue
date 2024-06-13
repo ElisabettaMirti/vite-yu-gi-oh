@@ -48,16 +48,8 @@ export default {
 <template>
 
 <main class="container-fluid p-5">
-    <section class="main-content container p-5">
-        <div class="results-number d-flex align-items-center">
-            <h4 class="ms-4">
-                Found {{ cards.length }} cards
-            </h4>
-        </div>
-        
         <MainCardsList :cards="cards" v-if="isLoaded"/> 
         <AppLoader v-else />
-    </section>    
 </main>
 
 </template>
@@ -68,8 +60,11 @@ export default {
 @use '../styles/partials/variables.scss' as *;
 @use '../styles/general.scss';
 
+
+
 main{
     background-color: #d48f38;
+    position: relative;
 
     section.main-content{
         background-color: white;

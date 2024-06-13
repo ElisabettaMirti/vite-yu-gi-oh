@@ -20,10 +20,16 @@ export default {
 </script>
 
 <template>
-
-<div class="cards-list">
-    <SingleCard class="cards p-2" v-for="(card, index) in cards" :key="index" :card="card"/>
-</div>                
+<section class="main-content container p-5">
+        <div class="results-number d-flex align-items-center">
+            <h4 class="ms-4">
+                Found {{ cards.length }} cards
+            </h4>
+        </div>
+    <div class="cards-list">
+        <SingleCard class="cards p-2" v-for="(card, index) in cards" :key="index" :card="card"/>
+    </div>
+</section>
 
 </template>
 

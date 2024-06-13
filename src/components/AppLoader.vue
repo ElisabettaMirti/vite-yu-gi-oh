@@ -17,7 +17,12 @@ export default {
 </script>
 
 <template>
-<span class="loader"></span>
+<div class="flip1">
+    <img src="http://vignette2.wikia.nocookie.net/myyugiohdeck/images/d/da/Dark_Magician.jpg/revision/latest?cb=20110610035254" width="240" height="290" />
+</div>
+<div class="flip2">
+    <img src="http://vignette3.wikia.nocookie.net/yugioh/images/9/94/Back-Anime-2.png/revision/20090601084536" width="240" height="290" />
+</div>
 </template>
 
 <style lang="scss" scoped>
@@ -26,26 +31,40 @@ export default {
 @use '../styles/partials/variables.scss' as *;
 @use '../styles/general.scss';
 
-.loader {
-    margin-top: 10rem;
-    width: 100%;
-    height: 12px;
-    display: inline-block;
-    background-color: #FFF;
-    background-image: linear-gradient(45deg, rgba(0, 0, 0, 0.25) 25%, transparent 25%, transparent 50%, rgba(0, 0, 0, 0.25) 50%, rgba(0, 0, 0, 0.25) 75%, transparent 75%, transparent);
-    font-size: 30px;
-    background-size: 1em 1em;
-    box-sizing: border-box;
-    animation: barStripe 1s linear infinite;
+body{
+    background-color: #d48f38;
 }
 
-@keyframes barStripe {
-    0% {
-    background-position: 1em 0;
-    }
-    100% {
-    background-position: 0 0;
-    }
+div {
+    -webkit-animation-duration: 3s;
+    -webkit-animation-iteration-count: infinite;
+    -webkit-animation-timing-function:linear;
+    -webkit-backface-visibility: hidden;
+    color: blue;
+    font-family: Helvetica,Arial,sans-serif;
+    font-weight: bold;
+    padding: 20px;
+    position: absolute;
+    top: 50%;
+    left: 40%;
+    transform: translate(-50%, -50%);
 }
 
+@-webkit-keyframes flip1 {
+    from { -webkit-transform: rotateY(0deg); }
+    to { -webkit-transform: rotateY(360deg); }
+}
+
+div.flip1 {
+    -webkit-animation-name: flip1;
+}
+
+@-webkit-keyframes flip2 {
+    from { -webkit-transform: rotateY(-180deg); }
+    to { -webkit-transform: rotateY(180deg); }
+}
+
+div.flip2 {
+    -webkit-animation-name: flip2;
+}
 </style>

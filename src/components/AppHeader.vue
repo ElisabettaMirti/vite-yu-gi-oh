@@ -33,6 +33,7 @@ export default {
 
 header{
     height: 120px;
+    background-color: white;
 
     img{
         height: 100%;
