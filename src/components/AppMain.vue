@@ -8,6 +8,7 @@ export default {
     data(){
         return{
             cards: [],
+            archetypes: [],
             isLoaded: false
         }
     },
@@ -18,7 +19,7 @@ export default {
     },
     methods: {
         getCards(){
-            axios.get('https://db.ygoprodeck.com/api/v7/cardinfo.php?num=20&offset=0')
+            axios.get('https://db.ygoprodeck.com/api/v7/cardinfo.php?num=20&offset=100')
             .then( (response) => {
                 // handle success
                 console.log(response.data.data);
@@ -38,11 +39,23 @@ export default {
             setTimeout(() => {
                 this.isLoaded = true;
             }, 6000);
+        },
+
+        getArchetype(){
+            axios.get('https://db.ygoprodeck.com/api/v7/archetypes.php')
+            .then( (response) =>{
+                console.log(response.data);
+                this.archetypes = response.data;
+            })
+            .catch(function (error) {
+                console.log(error);
+            })
         }
     },
     created(){
         this.getCards();
-        this.loadInOneSec()
+        this.loadInOneSec();
+        this.getArchetype();
     }
 }
 </script>
@@ -50,7 +63,7 @@ export default {
 <template>
 
 <main class="container-fluid p-5">
-    <MainSelect/>
+    <MainSelect :archetypes="archetypes" @searched="" />
     <MainCardsList :cards="cards" v-if="isLoaded"/> 
     <AppLoader v-else />
 </main>

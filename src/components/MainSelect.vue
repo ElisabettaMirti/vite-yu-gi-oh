@@ -7,17 +7,23 @@ export default {
     },
     components: {
         
+    },
+    props: {
+        archetypes: {
+            type: Array,
+            required: true
+        }
     }
 }
 </script>
 
 <template>
     <div class="select-btn">
-        <select class="form-select" aria-label="Default select example">
-            <option selected>Open this select menu</option>
-            <option value="1">One</option>
-            <option value="2">Two</option>
-            <option value="3">Three</option>
+        <select class="form-select">
+            <option selected>Choose an archetype</option>
+            <option v-for="(archetype , index) in archetypes":key="index" value="index" @click="$emit('searched')">
+                {{ archetype.archetype_name }}
+            </option>
         </select>
     </div>
 </template>
