@@ -3,12 +3,12 @@ import axios from 'axios';
 import MainCardsList from './MainCardsList.vue';
 import AppLoader from './AppLoader.vue';
 import MainSelect from './MainSelect.vue';
+import {store} from '../store.js'
 
 export default {
     data(){
         return{
-            cards: [],
-            archetypes: [],
+            store,
             isLoaded: false
         }
     },
@@ -19,11 +19,11 @@ export default {
     },
     methods: {
         getCards(){
-            axios.get('https://db.ygoprodeck.com/api/v7/cardinfo.php?num=20&offset=100')
+            axios.get('https://db.ygoprodeck.com/api/v7/cardinfo.php?archetype='  + store.archetypeSelected )
             .then( (response) => {
                 // handle success
-                console.log(response.data.data);
-                this.cards = response.data.data;
+                console.log(response.data);
+                this.store.cards = response.data;
                 // this.isLoaded = true;
             })
             .catch(function (error) {
@@ -38,24 +38,14 @@ export default {
         loadInOneSec(){
             setTimeout(() => {
                 this.isLoaded = true;
-            }, 6000);
+            }, 1000);
         },
 
-        getArchetype(){
-            axios.get('https://db.ygoprodeck.com/api/v7/archetypes.php')
-            .then( (response) =>{
-                console.log(response.data);
-                this.archetypes = response.data;
-            })
-            .catch(function (error) {
-                console.log(error);
-            })
-        }
+        
     },
     created(){
         this.getCards();
         this.loadInOneSec();
-        this.getArchetype();
     }
 }
 </script>
@@ -63,8 +53,8 @@ export default {
 <template>
 
 <main class="container-fluid p-5">
-    <MainSelect :archetypes="archetypes" @searched="" />
-    <MainCardsList :cards="cards" v-if="isLoaded"/> 
+    <MainSelect @searched="getCards()" />
+    <MainCardsList v-if="isLoaded"/> 
     <AppLoader v-else />
 </main>
 
