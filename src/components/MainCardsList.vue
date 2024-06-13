@@ -39,6 +39,11 @@ export default {
 @use '../styles/partials/variables.scss' as *;
 @use '../styles/general.scss';
 
+div.results-number{
+    height: 100px;
+    background-color: #212529;
+    color: white;
+}
 
 div.cards-list{
     display: flex;
