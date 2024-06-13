@@ -1,7 +1,8 @@
 <script>
 import axios from 'axios';
 import MainCardsList from './MainCardsList.vue';
-import AppLoader from './AppLoader.vue'
+import AppLoader from './AppLoader.vue';
+import MainSelect from './MainSelect.vue';
 
 export default {
     data(){
@@ -12,7 +13,8 @@ export default {
     },
     components: {
         MainCardsList,
-        AppLoader
+        AppLoader,
+        MainSelect
     },
     methods: {
         getCards(){
@@ -48,8 +50,9 @@ export default {
 <template>
 
 <main class="container-fluid p-5">
-        <MainCardsList :cards="cards" v-if="isLoaded"/> 
-        <AppLoader v-else />
+    <MainSelect/>
+    <MainCardsList :cards="cards" v-if="isLoaded"/> 
+    <AppLoader v-else />
 </main>
 
 </template>
