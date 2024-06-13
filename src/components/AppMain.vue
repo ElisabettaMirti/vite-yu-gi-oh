@@ -1,15 +1,15 @@
 <script>
 import axios from 'axios';
-import SingleCard from './SingleCard.vue'
+import MainCardsList from './MainCardsList.vue';
 
 export default {
     data(){
         return{
-            CardsList: []
+            cards: []
         }
     },
     components: {
-        SingleCard
+        MainCardsList
     },
     methods: {
         getCards(){
@@ -17,7 +17,7 @@ export default {
         .then( (response) => {
             // handle success
             console.log(response.data.data);
-            this.CardsList = response.data.data;
+            this.cards = response.data.data;
         })
         .catch(function (error) {
             // handle error
@@ -37,32 +37,15 @@ export default {
 <template>
 
 <main class="container-fluid p-5">
-
-            <section class="main-content container p-5">
-                <div class="results-number d-flex align-items-center">
-                    <h4 class="ms-4">
-                        Found {{ CardsList.length }} cards
-                    </h4>
-                </div>
-                
-                <div class="cards-list">
-                    <div class="cards p-2" v-for="(card, index) in CardsList" :key="index">
-                        <div class="card">
-                            <img class="card-img-top" :src="card.card_images[0].image_url" :alt="card.name">
-                            <div class="card-body">
-                                <h5 class="card-title fw-bold">
-                                    {{ card.name }}
-                                </h5>
-                                <p class="card-text">
-                                    {{ card.archetype }}
-                                </p>
-                            </div>
-                        </div>
-                    </div>
-                </div>                
-            </section>
-
-    
+    <section class="main-content container p-5">
+        <div class="results-number d-flex align-items-center">
+            <h4 class="ms-4">
+                Found {{ cards.length }} cards
+            </h4>
+        </div>
+        
+        <MainCardsList :cards="cards" /> 
+    </section>    
 </main>
 
 </template>
