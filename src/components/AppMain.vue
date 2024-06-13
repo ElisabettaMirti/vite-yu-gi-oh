@@ -1,35 +1,46 @@
 <script>
 import axios from 'axios';
 import MainCardsList from './MainCardsList.vue';
+import AppLoader from './AppLoader.vue'
 
 export default {
     data(){
         return{
-            cards: []
+            cards: [],
+            isLoaded: false
         }
     },
     components: {
-        MainCardsList
+        MainCardsList,
+        AppLoader
     },
     methods: {
         getCards(){
             axios.get('https://db.ygoprodeck.com/api/v7/cardinfo.php?num=20&offset=0')
-        .then( (response) => {
-            // handle success
-            console.log(response.data.data);
-            this.cards = response.data.data;
-        })
-        .catch(function (error) {
-            // handle error
-            console.log(error);
-        })
-        .finally(function () {
-            // always executed
-        });
+            .then( (response) => {
+                // handle success
+                console.log(response.data.data);
+                this.cards = response.data.data;
+                // this.isLoaded = true;
+            })
+            .catch(function (error) {
+                // handle error
+                console.log(error);
+            })
+            .finally(function () {
+                // always executed
+            });
+        },
+
+        loadInOneSec(){
+            setTimeout(() => {
+                this.isLoaded = true;
+            }, 6000);
         }
     },
     created(){
         this.getCards();
+        this.loadInOneSec()
     }
 }
 </script>
@@ -44,7 +55,8 @@ export default {
             </h4>
         </div>
         
-        <MainCardsList :cards="cards" /> 
+        <MainCardsList :cards="cards" v-if="isLoaded"/> 
+        <AppLoader v-else />
     </section>    
 </main>
 
@@ -71,26 +83,5 @@ div.results-number{
     color: white;
 }
 
-div.cards-list{
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    flex-wrap: wrap;
-}
-
-div.cards{
-    width: calc((100%/5) - .5rem);
-    align-self: flex-start;
-    border-color: transparent;
-    text-align: center;
-
-    div.card-body {
-        background-color: #d48f38;
-        
-        h5{
-            color: white;
-        }
-    }
-}
 
 </style>

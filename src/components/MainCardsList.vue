@@ -25,9 +25,6 @@ export default {
     <SingleCard class="cards p-2" v-for="(card, index) in cards" :key="index" :card="card"/>
 </div>                
 
-    
-
-
 </template>
 
 <style lang="scss" scoped>
